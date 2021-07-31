@@ -35,5 +35,5 @@ Link.propTypes = {
   href: T.string,
   external: T.bool,
   to: T.string,
-  RLink: T.node.isRequired,
+  RLink: T.node,
 }
