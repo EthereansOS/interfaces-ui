@@ -10,8 +10,9 @@ This component displays either a http link (with the a tag) or a router link.
 
 ## Props
 
-| Name     | Type   | Required | Default | Description                                    |
-| -------- | ------ | -------- | ------- | ---------------------------------------------- |
-| external | bool   |          |         | Set to true to open the href link in a new tab |
-| href     | string |          |         |                                                |
-| to       | string |          |         |                                                |
+| Name     | Type   | Required | Default | Description                                               |
+| -------- | ------ | -------- | ------- | --------------------------------------------------------- |
+| external | bool   |          |         | Set to true to open the href link in a new tab            |
+| href     | string |          |         |                                                           |
+| to       | string |          |         |                                                           |
+| RLink    | node   | yes      |         | The react-router Link component to use for app navigation |

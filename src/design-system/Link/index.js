@@ -1,11 +1,10 @@
 import React from 'react'
 import T from 'prop-types'
 import classNames from 'classnames'
-import { Link as RLink } from 'react-router-dom'
 
 import style from './link.module.scss'
 
-const Link = ({ children, className, external, href, to, ...props }) => {
+const Link = ({ children, className, external, href, to, RLink, ...props }) => {
   const additionalProps =
     external && href ? { target: '_blank', rel: 'noreferrer' } : {}
 
@@ -36,4 +35,5 @@ Link.propTypes = {
   href: T.string,
   external: T.bool,
   to: T.string,
+  RLink: T.node.isRequired,
 }
