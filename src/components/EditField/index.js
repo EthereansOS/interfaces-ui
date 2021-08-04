@@ -38,7 +38,7 @@ const EditField = ({
   const [field] = useField({ id, name })
 
   return (
-    <section>
+    <>
       <div className={style.header}>
         {label && (
           <Typography weight="bold" variant="body1">
@@ -58,7 +58,7 @@ const EditField = ({
           <Typography variant="body2">{description}</Typography>
         </Tooltip>
       )}
-    </section>
+    </>
   )
 }
 
