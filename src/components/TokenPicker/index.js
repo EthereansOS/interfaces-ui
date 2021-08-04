@@ -16,8 +16,10 @@ const TokenPicker = ({ tokenAddress, id, name }) => {
   const options = useMemo(
     () =>
       uniswapPairs.map((pair) => ({
-        id: pair.address,
-        label: `${pair.name} ${pair.symbol}`,
+        id: pair?.token1?.address || pair.address,
+        label: pair?.token1?.name
+          ? `${pair.token1.name} (${pair.token1.symbol})`
+          : pair.symbol,
       })),
     [uniswapPairs]
   )
