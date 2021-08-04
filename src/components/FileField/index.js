@@ -7,6 +7,7 @@ import { Button, Typography, Tooltip } from '../../design-system'
 
 import style from './file-field.module.scss'
 
+// TODO replace this with the global one exported from @ethereansos/interfaces-core
 async function checkCoverSize(file) {
   const cover = file.size ? file : file.item ? file.item(0) : file.get(0)
   return await new Promise(function (resolve) {
