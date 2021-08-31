@@ -68,6 +68,11 @@ const ConnectWidget = ({
         />
         <Button
           className={style.button}
+          text="Torus"
+          onClick={() => onConnectorClicked('torus')}
+        />
+        <Button
+          className={style.button}
           text="Frame"
           onClick={() => onConnectorClicked('frame')}
         />
