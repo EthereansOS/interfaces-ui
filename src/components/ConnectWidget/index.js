@@ -25,7 +25,6 @@ const ConnectWidget = ({
   }
 
   const onConnectorClicked = (provider) => {
-    console.log(provider)
     setModalOpen(false)
     connect(provider)
   }
@@ -68,6 +67,16 @@ const ConnectWidget = ({
         />
         <Button
           className={style.button}
+          text="Wallet Connect"
+          onClick={() => onConnectorClicked('walletconnect')}
+        />
+        <Button
+          className={style.button}
+          text="Wallet Link"
+          onClick={() => onConnectorClicked('walletlink')}
+        />
+        <Button
+          className={style.button}
           text="Torus"
           onClick={() => onConnectorClicked('torus')}
         />
@@ -93,6 +102,7 @@ ConnectWidget.propTypes = {
   connectionStatus: T.string.isRequired,
   title: T.string,
   className: T.string,
+  connectError: T.string,
   rotateLogo: T.bool,
 }
 
