@@ -5,6 +5,20 @@
   right: 0;
   bottom: 0;
   min-height: 100vh;
-  background-color: var(--color-background-dark);
   overflow: auto;
+}
+
+.centered {
+  padding: calc(var(--unit) * 20);
+  background-color: var(--color-background-dark);
+}
+
+.centeredContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fullWindow {
+  background-color: var(--color-background-dark);
 }
