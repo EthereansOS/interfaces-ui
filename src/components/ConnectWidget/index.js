@@ -153,4 +153,8 @@ ConnectWidget.propTypes = {
   ),
 }
 
+ConnectWidget.defaultProps = {
+  connectors: [],
+}
+
 export default ConnectWidget
