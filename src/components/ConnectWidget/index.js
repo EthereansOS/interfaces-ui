@@ -3,7 +3,7 @@ import T from 'prop-types'
 import classNames from 'classnames'
 import { webs3States } from '@ethereansos/interfaces-core'
 
-import { Button, Typography } from '../../design-system'
+import { Button, CircularProgress, Typography } from '../../design-system'
 import { Modal } from '../../design-system'
 
 import style from './connect-widget.module.scss'
@@ -14,20 +14,24 @@ const ConnectWidget = ({
   title,
   rotateLogo,
   className,
-  connect,
   connectionStatus,
   connectors,
+  wallet,
 }) => {
   const [modalOpen, setModalOpen] = useState(false)
+  const [activeConnector, setActiveConnector] = useState({
+    name: '',
+    label: '',
+  })
 
   const onClick = () => {
     setModalOpen(true)
     onClickConnect?.()
   }
 
-  const onConnectorClicked = async (provider) => {
-    setModalOpen(false)
-    connect(provider)
+  const onConnectorClicked = async (provider, label) => {
+    wallet.connect(provider)
+    setActiveConnector({ label, name: provider })
   }
 
   return (
@@ -58,18 +62,61 @@ const ConnectWidget = ({
       )}
       <Modal centered visible={!!modalOpen}>
         <div className={style.modalHeader}>
-          <Typography variant="h5">Connect to a wallet</Typography>
-          <Button text="Close" onClick={() => setModalOpen(false)} />
+          <Typography variant="h5">
+            {activeConnector.label || 'Connect to a wallet'}
+          </Typography>
+          <Button
+            text={activeConnector.name ? 'Indietro' : 'Close'}
+            onClick={() => {
+              if (activeConnector.name) {
+                setActiveConnector('')
+                wallet.reset()
+              } else {
+                setModalOpen(false)
+              }
+            }}
+          />
         </div>
 
-        {connectors.map((connector) => (
-          <Button
-            key={connector.id}
-            className={style.button}
-            text={connector.buttonText}
-            onClick={() => onConnectorClicked(connector.id)}
-          />
-        ))}
+        {activeConnector.name && (
+          <>
+            {wallet.status === 'connecting' && (
+              <Typography variant="body1">
+                Connecting to {activeConnector.label} <CircularProgress />
+              </Typography>
+            )}
+            {wallet.status === 'error' && (
+              <>
+                <Typography variant="body1">{wallet.error?.message}</Typography>
+                <Button
+                  className={style.retryButton}
+                  onClick={() => {
+                    wallet.reset()
+                    wallet.connect(activeConnector.name)
+                  }}
+                  text="Retry"
+                />
+              </>
+            )}
+            {wallet.status === 'connected' && (
+              <Typography variant="body1">
+                You've been correctly connected
+              </Typography>
+            )}
+          </>
+        )}
+
+        {!activeConnector.name &&
+          connectors.map((connector) => (
+            <Button
+              key={connector.id}
+              className={style.button}
+              text={connector.buttonText}
+              onClick={() =>
+                onConnectorClicked(connector.id, connector.buttonText)
+              }
+            />
+          ))}
       </Modal>
     </div>
   )
@@ -78,12 +125,21 @@ const ConnectWidget = ({
 ConnectWidget.propTypes = {
   logo: T.string,
   onClickConnect: T.func,
-  connect: T.func.isRequired,
   connectionStatus: T.string.isRequired,
   title: T.string,
   className: T.string,
   connectError: T.string,
   rotateLogo: T.bool,
+  wallet: T.shape({
+    connect: T.func.isRequired,
+    status: T.oneOf(['disconnected', 'connecting', 'connected', 'error'])
+      .isRequired,
+    error: T.shape({
+      name: T.string,
+      message: T.string,
+    }),
+    reset: T.func.isRequired,
+  }).isRequired,
   connectors: T.arrayOf(
     T.shape({
       id: T.string,
