@@ -29,9 +29,9 @@ const ConnectWidget = ({
     onClickConnect?.()
   }
 
-  const onConnectorClicked = async (provider, label) => {
-    wallet.connect(provider)
-    setActiveConnector({ label, name: provider })
+  const onConnectorClicked = async (name, label) => {
+    wallet.connect(name)
+    setActiveConnector({ label, name })
   }
 
   return (
@@ -66,10 +66,10 @@ const ConnectWidget = ({
             {activeConnector.label || 'Connect to a wallet'}
           </Typography>
           <Button
-            text={activeConnector.name ? 'Indietro' : 'Close'}
+            text={activeConnector.name ? 'Back' : 'Close'}
             onClick={() => {
               if (activeConnector.name) {
-                setActiveConnector('')
+                setActiveConnector({ name: '', label: '' })
                 wallet.reset()
               } else {
                 setModalOpen(false)
@@ -107,16 +107,20 @@ const ConnectWidget = ({
         )}
 
         {!activeConnector.name &&
-          connectors.map((connector) => (
-            <Button
-              key={connector.id}
-              className={style.button}
-              text={connector.buttonText}
-              onClick={() =>
-                onConnectorClicked(connector.id, connector.buttonText)
-              }
-            />
-          ))}
+          connectors
+            .filter((connector) =>
+              connector.enabledChains.includes(wallet.networkName)
+            )
+            .map((connector) => (
+              <Button
+                key={connector.id}
+                className={style.button}
+                text={connector.buttonText}
+                onClick={() =>
+                  onConnectorClicked(connector.id, connector.buttonText)
+                }
+              />
+            ))}
       </Modal>
     </div>
   )
@@ -131,6 +135,7 @@ ConnectWidget.propTypes = {
   connectError: T.string,
   rotateLogo: T.bool,
   wallet: T.shape({
+    networkName: T.string,
     connect: T.func.isRequired,
     status: T.oneOf(['disconnected', 'connecting', 'connected', 'error'])
       .isRequired,
