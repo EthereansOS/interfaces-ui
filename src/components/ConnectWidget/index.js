@@ -16,6 +16,7 @@ const ConnectWidget = ({
   className,
   connect,
   connectionStatus,
+  connectors,
 }) => {
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -24,7 +25,7 @@ const ConnectWidget = ({
     onClickConnect?.()
   }
 
-  const onConnectorClicked = (provider) => {
+  const onConnectorClicked = async (provider) => {
     setModalOpen(false)
     connect(provider)
   }
@@ -60,36 +61,15 @@ const ConnectWidget = ({
           <Typography variant="h5">Connect to a wallet</Typography>
           <Button text="Close" onClick={() => setModalOpen(false)} />
         </div>
-        <Button
-          className={style.button}
-          text="Metamask"
-          onClick={() => onConnectorClicked('injected')}
-        />
-        <Button
-          className={style.button}
-          text="Wallet Connect"
-          onClick={() => onConnectorClicked('walletconnect')}
-        />
-        <Button
-          className={style.button}
-          text="Wallet Link"
-          onClick={() => onConnectorClicked('walletlink')}
-        />
-        <Button
-          className={style.button}
-          text="Torus"
-          onClick={() => onConnectorClicked('torus')}
-        />
-        <Button
-          className={style.button}
-          text="Frame"
-          onClick={() => onConnectorClicked('frame')}
-        />
-        <Button
-          className={style.button}
-          text="Authereum"
-          onClick={() => onConnectorClicked('authereum')}
-        />
+
+        {connectors.map((connector) => (
+          <Button
+            key={connector.id}
+            className={style.button}
+            text={connector.buttonText}
+            onClick={() => onConnectorClicked(connector.id)}
+          />
+        ))}
       </Modal>
     </div>
   )
@@ -104,6 +84,12 @@ ConnectWidget.propTypes = {
   className: T.string,
   connectError: T.string,
   rotateLogo: T.bool,
+  connectors: T.arrayOf(
+    T.shape({
+      id: T.string,
+      buttonText: T.string,
+    })
+  ),
 }
 
 export default ConnectWidget
