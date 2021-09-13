@@ -4,12 +4,24 @@ import classNames from 'classnames'
 
 import style from './modal.module.scss'
 
-const Modal = ({ visible, children, className }) => {
+const Modal = ({ visible, children, centered = false, className }) => {
   if (!visible) {
     return null
   }
 
-  return <div className={classNames(style.root, className)}>{children}</div>
+  if (centered) {
+    return (
+      <div className={classNames(style.root, style.centeredContainer)}>
+        <div className={classNames(style.centered, className)}>{children}</div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={classNames(style.root, style.fullWindow, className)}>
+      {children}
+    </div>
+  )
 }
 
 export default Modal
@@ -18,4 +30,5 @@ Modal.propTypes = {
   visible: T.bool,
   children: T.node,
   className: T.string,
+  centered: T.bool,
 }
