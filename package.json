@@ -35,7 +35,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
-    "@ethereansos/interfaces-core": "0.1.0",
+    "@ethereansos/interfaces-core": "0.3.1",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-image": "^2.0.5",
     "@rollup/plugin-node-resolve": "^10.0.0",
@@ -80,7 +80,7 @@
     "web3-utils": "^1.4.0"
   },
   "peerDependencies": {
-    "@ethereansos/interfaces-core": "0.1.0",
+    "@ethereansos/interfaces-core": "0.3.1",
     "ipfs-http-client": "50.1.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
