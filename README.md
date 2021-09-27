@@ -4,14 +4,11 @@ This package holds the design system and the complex components and widgets.
 
 It should grow with all the components needed by the application.
 
-
 ## Components
 
 The available sample components are:
 
 - [ConnectWidget](./src/ConnectWidget/README.md)
-
-## Styling
 
 ## Styling
 
@@ -86,11 +83,34 @@ If you prefer to build only this package, just run:
 npm run build
 ```
 
-to simply build the package, or
+To build and keep watching for changes:
 
 ```shell script
 npm run build:dev
 ```
 
-to build and keep watching for changes.
+## Development with `Interfaces-framework`
 
+To use `interfaces-ui` for development (so using a checked-out version instead of the `npm` dependencies) some steps must be followed.
+
+Assuming that we have cloned [Interfaces-framework](https://github.com/EthereansOS/Interfaces-framework) in the same folder where we cloned this repo, we need to:
+
+- `npm install` (only if you don't already have the deps installed)
+- `npm link ../Interfaces-framework/node_modules/react`
+- `npm build` (or build:dev to develop in watch mode. See below)
+- `npm link`
+
+The first `npm link` links the `react` used by `Interfaces-framework` to avoid [this problem](https://reactjs.org/warnings/invalid-hook-call-warning.html#duplicate-react).
+
+Then, enter in `Interface-Framework` and link it to the ui:
+
+- `cd ../Interfaces-framework`
+- `npm link @ethereansos/interfaces-ui`
+
+After this, you're using the checked-out version for all the apps or plugins in the `packages` folder.
+
+PS: Remember to execute **just** the linkings every time you install a new dependency in either of the two projects.
+
+### Development in watch mode
+
+To start build the core at each file change, after having followed the above instructions, just run `npm run build:dev` and if you've linked this package with the Interfaces-Framework package, you'll see live changes as soon as you edit the code.
