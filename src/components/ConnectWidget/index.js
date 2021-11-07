@@ -107,20 +107,16 @@ const ConnectWidget = ({
         )}
 
         {!activeConnector.name &&
-          connectors
-            .filter((connector) =>
-              connector.enabledChains.includes(wallet.networkName)
-            )
-            .map((connector) => (
-              <Button
-                key={connector.id}
-                className={style.button}
-                text={connector.buttonText}
-                onClick={() =>
-                  onConnectorClicked(connector.id, connector.buttonText)
-                }
-              />
-            ))}
+          connectors.map((connector) => (
+            <Button
+              key={connector.id}
+              className={style.button}
+              text={connector.buttonText}
+              onClick={() =>
+                onConnectorClicked(connector.id, connector.buttonText)
+              }
+            />
+          ))}
       </Modal>
     </div>
   )
