@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from 'react'
 import { action } from '@storybook/addon-actions'
-import { webs3States } from '@ethereansos/interfaces-core'
+import { web3States } from '@ethereansos/interfaces-core'
 
 import logoImg from '../../../__data/ghostload.gif'
 
@@ -20,7 +20,7 @@ export const Default = Template.bind({})
 
 Default.args = {
   logo: logoImg,
-  connectionStatus: webs3States.NOT_CONNECTED,
+  connectionStatus: web3States.NOT_CONNECTED,
   title: 'DFOhub',
   onConnect: action('Connect'),
 }
@@ -29,7 +29,7 @@ export const Connecting = Template.bind({})
 
 Connecting.args = {
   logo: logoImg,
-  connectionStatus: webs3States.CONNECTING,
+  connectionStatus: web3States.CONNECTING,
   title: 'DFOhub',
   onConnect: action('Connect'),
 }

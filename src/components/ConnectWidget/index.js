@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import T from 'prop-types'
 import classNames from 'classnames'
-import { webs3States } from '@ethereansos/interfaces-core'
+import { web3States } from '@ethereansos/interfaces-core'
 
 import { Button, CircularProgress, Typography } from '../../design-system'
 import { Modal } from '../../design-system'
@@ -47,9 +47,9 @@ const ConnectWidget = ({
         {title}
       </Typography>
       <br />
-      {connectionStatus === webs3States.CONNECTED && <div>Connected</div>}
-      {connectionStatus === webs3States.CONNECTING && <div>Connecting</div>}
-      {connectionStatus === webs3States.NOT_CONNECTED && (
+      {connectionStatus === web3States.CONNECTED && <div>Connected</div>}
+      {connectionStatus === web3States.CONNECTING && <div>Connecting</div>}
+      {connectionStatus === web3States.NOT_CONNECTED && (
         <>
           <Button onClick={onClick} text="Connect" variant="primary" />
           <br />

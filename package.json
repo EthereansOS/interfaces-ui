@@ -1,6 +1,6 @@
 {
   "name": "@ethereansos/interfaces-ui",
-  "version": "0.4.14",
+  "version": "0.4.34",
   "description": "",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -36,7 +36,7 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@commitlint/config-lerna-scopes": "^11.0.0",
-    "@ethereansos/interfaces-core": "0.4.14",
+    "@ethereansos/interfaces-core": "^0.4.34",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-image": "^2.0.5",
     "@rollup/plugin-node-resolve": "^10.0.0",
